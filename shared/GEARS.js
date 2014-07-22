@@ -9,7 +9,10 @@ var GEARS = angular.module("GEARS", ["ngRoute", "GEARS.Platform", "GEARS.Specifi
 
             service.version = "0.1"; // Версия модуля
             service.title = "GEARS Basic"; // Наименование модуля
-            service.partitions = new Collection();
+            service.description = "GEARS Basic module, engine";
+            service.modules = new Collection();
+            //service.partitions = new Collection();
+
 
 
             return service;
@@ -18,4 +21,11 @@ var GEARS = angular.module("GEARS", ["ngRoute", "GEARS.Platform", "GEARS.Specifi
     /* Инициализация модуля */
     .run(function(GEARSBasic, SystemMonitor){
         SystemMonitor.addMessage("Module loaded: '" + GEARSBasic.title + "' (v " + GEARSBasic.version + ")");
+        GEARSBasic.modules.addItem(new Module({
+            id: 1,
+            version: GEARSBasic.version,
+            title: GEARSBasic.title,
+            description: GEARSBasic.description
+        }));
+        console.log(GEARSBasic.modules.items);
     });

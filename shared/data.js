@@ -80,7 +80,26 @@ var Partition = function(parameters){
             if(this.hasOwnProperty(parameter)){
                 switch(parameter){
                     default:
-                        this[option] = parameters[option];
+                        this[parameter] = parameters[parameter];
+                        break;
+                }
+            }
+        }
+    }
+};
+
+var Module = function(parameters){
+    this.id = 0;
+    this.version = "0.0";
+    this.title = "";
+    this.description = "";
+
+    if(parameters){
+        for(var parameter in parameters){
+            if(this.hasOwnProperty(parameter)){
+                switch(parameter){
+                    default:
+                        this[parameter] = parameters[parameter];
                         break;
                 }
             }

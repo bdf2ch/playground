@@ -1,3 +1,18 @@
 body {
   border: 1px solid #ffffff;
 }
+#wrapper {
+  height: 500px;
+}
+#header {
+  height: 80px;
+  border: 1px solid red;
+}
+#menu {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 300px;
+  border: 1px solid black;
+}

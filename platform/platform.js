@@ -22,6 +22,4 @@ var platform = angular.module("GEARS.Platform", ["Platform.Services"])
     /* Инициализация модуля */
     .run(function(SystemMonitor){
         SystemMonitor.addMessage("Platform loaded successfully");
-
-
     });
