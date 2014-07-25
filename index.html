@@ -6,22 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GEARS</title>
     <link href="shared/styles/style.css">
+    <link rel="stylesheet/less" type="text/css" href="shared/styles/style.less">
     <link href="shared/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
         <div id="header">
-            <!--
-            <nav class="navbar navbar-default navbar-static-top" role="navigation">
-                <div class="container">
-                    ...
-                </div>
-            </nav>
-            -->
+            <div id="appTitle" ng-controller="GEARSCtrl">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#" ng-if="application.app.title != ''">{{ application.info.title }}
+                                <span class="domain">{{ application.info.domain }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div id="appNavbar" ng-controller="GEARSCtrl">
+                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                    <div class="container-fluid">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="#">{{ gears.partitions.findItemById(gears.currentPartitionId).title }}</a>
+                        </div>
+                    </div>
+                </nav>
+
+            </div>
         </div>
+
         <div id="content">
-            <div id="menu"></div>
-            <div ng-repeat="module in GEARSBasic.modules.items">{{module.title}}</div>
+            <div id="menu" ng-controller="GEARSCtrl">
+                <div id="menuHeader" class="bg-primary">
+                    Меню
+                </div>
+                <div id="menuItems">
+                   <!-- <a href="{{ '#' + partition.url }}" class="menuItem" -->
+                    <a href="{{ '#' + partition.url }}" class="menuItem"
+                       ng-class="{active: partition.id == gears.currentPartitionId}" ng-repeat="partition in gears.partitions.items"
+                       ng-click="setActivePartition(partition.id)" title="{{ partition.description }}">
+                        <div class="menuItemIcon">
+                            <img src="" alt=""/>
+                        </div>
+                        <div class="menuItemTitle">
+                            {{ partition.title }}<br>
+                        </div>
+                        <div class="menuItemDescription">{{ partition.description }}</div>
+                    </a>
+                </div>
+            </div>
+            <div id="template" ng-view></div>
         </div>
     </div>
 
@@ -31,12 +73,14 @@
     <script src="shared/libs/angularjs/angular-cookies.min.js"></script>
     <script src="shared/libs/angularjs/angular-animate.min.js"></script>
     <script src="shared/libs/momentjs/moment.min.js"></script>
+    <script src="shared/libs/less/less-1.7.3.min.js"></script>
     <!-- Подключение модулей платформы -->
     <script src="shared/data.js"></script>
     <script src="platform/platform.js"></script>
     <script src="platform/platform.services.js"></script>
-    <script src="platform/services/authorization.js"></script>
-    <script src="platform/services/monitoring.js"></script>
+    <script src="platform/modules/authorization.js"></script>
+    <script src="platform/modules/monitoring.js"></script>
+    <script src="platform/modules/moduleManager.js"></script>
     <!-- Подключение модулей приложения -->
     <script src="specific/specific.js"></script>
     <script src="specific/specific.services.js"></script>

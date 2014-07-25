@@ -1,18 +1,155 @@
-body {
-  border: 1px solid #ffffff;
+/***   ЦВЕТА   ***/
+/***   МЕТРИКИ   ***/
+/***   ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ   ***/
+.smallLabel {
+  font-size: 11px;
+  color: darkgray;
+}
+.not-link {
+  text-decoration: none;
 }
 #wrapper {
-  height: 500px;
+  height: 100%;
 }
+/* ШАПКА */
 #header {
-  height: 80px;
-  border: 1px solid red;
-}
-#menu {
   position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  height: 50px;
+}
+#header #appTitle {
+  width: 250px;
+  height: 50px;
+  border-right: 1px solid lightgray;
+}
+#header #appTitle .navbar-brand {
+  margin-top: -5px;
+}
+#header #appTitle .domain {
+  display: inline-block;
+  margin-top: -10px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+#header #appNavbar {
+  position: absolute;
+  left: 250px;
+  right: 0px;
+  top: 0px;
+  height: 50px;
+  margin-bottom: 0px;
+}
+/* СОДЕРЖАНИЕ */
+#content {
+  position: absolute;
+  overflow: hidden;
+  left: 0px;
+  right: 0px;
+  top: 50px;
+  bottom: 0px;
+}
+#content #menu {
+  position: absolute;
+  overflow: hidden;
   left: 0px;
   top: 0px;
   bottom: 0px;
-  width: 300px;
-  border: 1px solid black;
+  width: 250px;
+  border-right: 1px solid lightgray;
+  /* Контейнер элементов меню */
+}
+#content #menu #menuHeader {
+  display: table-cell;
+  width: 250px;
+  height: 30px;
+  padding-left: 5px;
+  vertical-align: middle;
+}
+#content #menu #menuItems {
+  position: absolute;
+  overflow-y: auto;
+  overflow-x: hidden;
+  top: 30px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  background: #edeef2;
+  /* Элемент меню */
+}
+#content #menu #menuItems .menuItem {
+  float: left;
+  width: 100%;
+  padding: 5px;
+  border-bottom: 1px solid lightgray;
+  background-image: -webkit-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -moz-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: -o-linear-gradient(top, #ffffff, #f2f2f2);
+  background-image: linear-gradient(top, #ffffff, #f2f2f2);
+  text-decoration: none;
+}
+#content #menu #menuItems .menuItem .menuItemIcon {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+  background: lightgray;
+}
+#content #menu #menuItems .menuItem .menuItemTitle {
+  margin-top: -4px;
+  margin-left: 40px;
+}
+#content #menu #menuItems .menuItem .menuItemDescription {
+  margin-left: 40px;
+  line-height: 12px;
+  font-size: 11px;
+  color: darkgray;
+}
+#content #menu #menuItems .active {
+  background-color: #c8c8c8;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.121569) 0px 3px 8px 0px inset;
+  -moz-box-shadow: rgba(0, 0, 0, 0.121569) 0px 3px 8px 0px inset;
+  -o-box-shadow: rgba(0, 0, 0, 0.121569) 0px 3px 8px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.121569) 0px 3px 8px 0px inset;
+}
+#template {
+  position: absolute;
+  overflow: auto;
+  left: 250px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+/***   MODULES   ***/
+#modules-wrapper {
+  padding: 10px;
+}
+.moduleItem {
+  overflow: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 10px 0px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 10px 0px;
+  -o-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 10px 0px;
+}
+.moduleItem .moduleInfo {
+  float: left;
+}
+.moduleItem .moduleVersion {
+  color: grey;
+  font-size: 11px;
+  color: darkgray;
+}
+.moduleItem img {
+  display: inline-block;
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  background: lightgray;
 }

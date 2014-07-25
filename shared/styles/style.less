@@ -1,29 +1,207 @@
-@font-color: #FFFFFF;
+/***   ЦВЕТА   ***/
+@menu-bg-color: rgb(237, 238, 242); // Фоновый цвет контейнера меню
+@menu-item-start-color: rgb(255, 255, 255); // Цвета старта градиента элемента меню
+@menu-item-end-color: rgb(242, 242, 242); // Цвет финиша градиента элемента меню
 
-body {
-  border: 1px solid @font-color;
+/***   МЕТРИКИ   ***/
+@navbar-height: 50px; // Высота навбара
+@menu-width: 250px; // Ширина меню
+
+/***   ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ   ***/
+
+.linear-gradient(@start, @end) {
+    background-image: -webkit-linear-gradient(top, @start, @end);
+    background-image: -moz-linear-gradient(top, @start, @end);
+    background-image: -o-linear-gradient(top, @start, @end);
+    background-image: linear-gradient(top, @start, @end);
 }
 
-.rounded-corners(@radius: 5px){
-  border-radius: @radius;
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  -o-border-radius: @radius;
+.box-shadow(@color) {
+    -webkit-box-shadow: @color 0px 1px 10px 0px;
+    -moz-box-shadow: @color 0px 1px 10px 0px;
+    -o-box-shadow: @color 0px 1px 10px 0px;
+    box-shadow: @color 0px 1px 10px 0px;
 }
 
+.box-shadow-inset(@color){
+  -webkit-box-shadow: @color 0px 3px 8px 0px inset;
+  -moz-box-shadow: @color 0px 3px 8px 0px inset;
+  -o-box-shadow: @color 0px 3px 8px 0px inset;
+  box-shadow: @color 0px 3px 8px 0px inset;
+}
+
+.smallLabel {
+    font-size: 11px; color: darkgray;
+}
+
+.not-link {
+    text-decoration: none;
+}
+
+
+
+
+
+.rounded-corners(@radius: 5px) {
+    border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    -o-border-radius: @radius;
+}
 
 #wrapper {
-  height: 500px;
+    height: 100%;
 }
+
+/* ШАПКА */
+
 
 #header {
-  height: 80px;
-  border: 1px solid red;
+    position: absolute;
+    left: 0px; right: 0px; top: 0px;
+    height: @navbar-height;
+    //border: 1px solid red;
+    
+    #appTitle {
+        width: 250px; height: @navbar-height;
+        border-right: 1px solid lightgray;
+
+        .navbar-brand {
+          //padding-bottom: -30px !important;
+          margin-top: -5px;
+        }
+
+        .domain {
+          display: inline-block;
+          margin-top: -10px;
+          font-size: 12px; vertical-align: middle;
+        }
+    }
+
+
+    #appNavbar {
+        position: absolute;
+        left: 250px; right: 0px; top: 0px;
+        height: @navbar-height;
+        margin-bottom: 0px;
+    }
 }
 
-#menu {
-  position: absolute;
-  left: 0px; top: 0px; bottom: 0px;
-  width: 300px;
-  border: 1px solid black;
+
+
+
+
+/* СОДЕРЖАНИЕ */
+#content {
+    position: absolute; overflow: hidden;
+    left: 0px; right: 0px; top: @navbar-height; bottom: 0px;
+    //background: #F8F8F8;
+    //border: 1px solid green;
+
+
+    #menu {
+        position: absolute; overflow: hidden;
+        left: 0px; top: 0px; bottom: 0px;
+        width: @menu-width;
+        border-right: 1px solid lightgray;
+        //border: 1px solid black;
+
+        #menuHeader {
+            display: table-cell;
+            width: @menu-width; height: 30px;
+            padding-left: 5px;
+            vertical-align: middle;
+            //background: lightyellow;
+        }
+
+        /* Контейнер элементов меню */
+        #menuItems {
+            position: absolute; overflow-y: auto; overflow-x: hidden;
+            top: 30px; bottom: 0px; left: 0px; right: 0px;
+            padding-left: 0px !important; padding-right: 0px !important;
+            background: @menu-bg-color;
+            //border: 1px solid blue;
+
+            /* Элемент меню */
+            .menuItem {
+                float: left;
+                //width: @menu-width; min-height: 40px;
+                width: 100%;
+                padding: 5px;
+                border-bottom: 1px solid lightgray;
+                //cursor: pointer;
+                .linear-gradient(@menu-item-start-color, @menu-item-end-color);
+                .not-link;
+
+
+
+                .menuItemIcon {
+                    float: left;
+                    width: 40px; height: 40px;
+                    margin-right: 5px;
+                    background: lightgray;
+                }
+                
+                .menuItemTitle {
+                    margin-top: -4px;
+                    margin-left: 40px;
+                }
+
+                .menuItemDescription {
+                    margin-left: 40px;
+                    line-height: 12px;
+                    .smallLabel
+                }
+            }
+          .active {
+               background-color: rgb(200, 200, 200);
+               .box-shadow-inset(rgba(0, 0, 0, 0.121569));
+             }
+
+        }
+
+    }
+
+}
+
+#template {
+    position: absolute; overflow: auto;
+    left: 250px; right: 0px; top: 0px; bottom: 0px;
+    //border: 1px solid yellow;
+}
+
+
+/***   MODULES   ***/
+#modules-wrapper {
+    padding: 10px;
+}
+
+.moduleItem {
+    //height: auto;
+    overflow: auto;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    .box-shadow(rgba(0, 0, 0, 0.0980392));
+
+    .moduleInfo {
+        float: left;
+    }
+
+    .moduleVersion {
+        color: grey; //font-weight: bold;
+        .smallLabel;
+    }
+    
+    img {
+        display: inline-block; float: left;
+        width: 50px; height: 50px;
+        margin-right: 10px;
+        //border: 1px solid lightgray;
+        background: lightgray;
+    }
+    
+    .moduleControls {
+        //border: 1px solid black;
+    }
 }

@@ -9,7 +9,6 @@ var monitoring = angular.module("Monitoring", [])
 
             service.version = "0.1"; // Версия модуля
             service.title = "System monitor"; // Наименование модуля
-            service.description = "Provide modules monitoring, logging and stats";
             service.messages = []; // Стек сообщений
 
             // Добавляет сообщение в стек сообщение
@@ -32,13 +31,7 @@ var monitoring = angular.module("Monitoring", [])
 
     })
     /* Инициализация модуля */
-    .run(function(SystemMonitor, GEARSBasic){
+    .run(function(SystemMonitor){
         SystemMonitor.addMessage("Module loaded: '" + SystemMonitor.title + "' (v " + SystemMonitor.version + ")");
-        GEARSBasic.modules.addItem(new Module({
-            id: 2,
-            version: SystemMonitor.version,
-            title: SystemMonitor.title,
-            description: SystemMonitor.description
-        }));
     });
 
