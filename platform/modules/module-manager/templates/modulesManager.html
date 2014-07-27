@@ -1,0 +1,17 @@
+<div id="modules-wrapper">
+    <div class="moduleItem" ng-repeat="module in module.modules.items">
+        <img src="" alt=""/>
+        <div class="moduleInfo">
+            {{ module.title }}
+            <span class="moduleVersion"> &nbsp; версия {{ module.version }}</span><br>
+            <span class="smallLabel">{{ module.description }}</span>
+        </div>
+        <div class="moduleControls pull-right">
+            <span class="smallLabel">Доступна новая версия</span><br>
+            <button type="button" class="btn btn-info btn-sm pull-right">
+                <span class="glyphicon glyphicon-download"></span>
+                Обновить модуль</button>
+        </div>
+    </div>
+
+</div>
