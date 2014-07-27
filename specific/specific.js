@@ -1,40 +1,21 @@
 /*** ГЛОБАЛЬНЫЙ МОДУЛЬ ПРИЛОЖЕНИЯ ***/
-var specific = angular.module("GEARS.Specific", ["Specific.Services"])
+var specific = angular.module("GEARS.Specific", ["Specific.Modules", "Specific.Filters", "Specific.Directives"])
     /* Настройка модуля */
     .config(function($provide){
         $provide.factory("Specific", function(){
-            var service = {};
+            var module = {};
 
-            service.info = {
+            /* Информация о приложении */
+            module.info = {
                 title: "Test Application",
                 domain: "www.testapp.com"
             };
+            module.partitions = new Collection(); // Разделы приложения
 
-            /* Разделы приложения */
-            service.partitions = new Collection();
-            // Тестовый раздел
-            service.partitions.addItem(new Partition(
-                {
-                    id: "specifictest",
-                    title: "Тестовый модуль",
-                    description: "Тестовый модуль приложения blah blah blah blah blah",
-                    url: "/test",
-                    icon: "",
-                    template: "specific/templates/test.html",
-                    controller: "TestCtrl"
-                }
-            ));
-
-            return service;
+            return module;
         })
     })
     /* Инициализация модуля */
     .run(function(){
 
     });
-
-specific.controller("TestCtrl", ["$scope", "Specific", "GEARSBasic", function($scope, Specific, GEARSBasic){
-    $scope.application = Specific;
-    $scope.gears = GEARSBasic;
-    $scope.gears.currentPartitionId = "specifictest"; // Идентификатор связанного раздела
-}]);

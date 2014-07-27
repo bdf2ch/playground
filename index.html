@@ -10,32 +10,25 @@
     <link href="shared/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" ng-controller="GEARSCtrl">
         <div id="header">
-            <div id="appTitle" ng-controller="GEARSCtrl">
-                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div id="appTitle">
+                <nav class="navbar navbar-default navbar-static-top">
                     <div class="container-fluid">
                         <!-- Brand and toggle get grouped for better mobile display -->
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#" ng-if="application.app.title != ''">{{ application.info.title }}
+                            <a class="navbar-brand" href="#" ng-if="application.info.title != ''">{{ application.info.title }}
                                 <span class="domain">{{ application.info.domain }}</span>
                             </a>
                         </div>
                     </div>
                 </nav>
             </div>
-            <div id="appNavbar" ng-controller="GEARSCtrl">
-                <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div id="appNavbar">
+                <nav class="navbar navbar-default navbar-static-top">
                     <div class="container-fluid">
-
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#">{{ gears.partitions.findItemById(gears.currentPartitionId).title }}</a>
+                            <a class="navbar-brand" href>{{ gears.partitions.findItemByField("isActive", true).title }}</a>
                         </div>
                     </div>
                 </nav>
@@ -44,14 +37,14 @@
         </div>
 
         <div id="content">
-            <div id="menu" ng-controller="GEARSCtrl">
+            <div id="menu" ng-controller="MenuCtrl">
                 <div id="menuHeader" class="bg-primary">
-                    Меню
+                    Меню {{ partitions.items }}
                 </div>
                 <div id="menuItems">
                    <!-- <a href="{{ '#' + partition.url }}" class="menuItem" -->
                     <a href="{{ '#' + partition.url }}" class="menuItem"
-                       ng-class="{active: partition.id == gears.currentPartitionId}" ng-repeat="partition in gears.partitions.items"
+                       ng-class="{active: partition.isActive}" ng-repeat="partition in menu.items"
                        ng-click="setActivePartition(partition.id)" title="{{ partition.description }}">
                         <div class="menuItemIcon">
                             <img src="" alt=""/>
@@ -75,15 +68,21 @@
     <script src="shared/libs/momentjs/moment.min.js"></script>
     <script src="shared/libs/less/less-1.7.3.min.js"></script>
     <!-- Подключение модулей платформы -->
-    <script src="shared/data.js"></script>
+    <script src="platform/classes.js"></script>
     <script src="platform/platform.js"></script>
-    <script src="platform/platform.services.js"></script>
-    <script src="platform/modules/authorization.js"></script>
-    <script src="platform/modules/monitoring.js"></script>
-    <script src="platform/modules/moduleManager.js"></script>
+    <script src="platform/platform.modules.js"></script>
+    <script src="platform/platform.filters.js"></script>
+    <script src="platform/platform.directives.js"></script>
+    <!-- <script src="platform/modules/authrization/authorization.js"></script> -->
+    <script src="platform/modules/monitoring/monitoring.js"></script>
+    <script src="platform/modules/module-manager/moduleManager.js"></script>
+    <script src="specific/modules/test-module/test-module.js"></script>
     <!-- Подключение модулей приложения -->
+    <script src="specific/classes.js"></script>
     <script src="specific/specific.js"></script>
-    <script src="specific/specific.services.js"></script>
+    <script src="specific/specific.modules.js"></script>
+    <script src="specific/specific.filters.js"></script>
+    <script src="specific/specific.directives.js"></script>
     <!-- Подключение глобального модуля -->
     <script src="shared/GEARS.js"></script>
 </body>

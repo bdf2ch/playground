@@ -1,38 +1,36 @@
-
-
 /****** ГЛОБАЛЬНЫЙ МОДУЛЬ  ******/
 'use strict';
 
 var GEARS = angular.module("GEARS", ["ngRoute", "GEARS.Platform", "GEARS.Specific"])
     /* Настройка модуля */
     .config(function($provide, $routeProvider){
-        $provide.factory("GEARSBasic", ["Platform", "Specific", function(GEARSPlatform, GEARSSpecific){
-            var service = {};
+        $provide.factory("GEARS", ["Platform", "Specific", function(Platform, Specific){
+            var module = {};
 
-            // Информация о модуле
-            service.module = {
+            /* Информация о системе */
+            module.info = {
                 id: "gearsbasic", // Идентификатор модуля
                 version: "0.1", // Версия модуля
-                title: "GEARS Basic", // Наименование модуля
-                description: "GEARS Basic module, engine" // Описание модуля
+                title: "GEARS", // Наименование модуля
+                description: "GEARS engine" // Описание модуля
             };
 
             /* Разделы системы */
-            service.partitions = new Collection(); // Коллекция разделов системы
-            service.currentPartitionId = ""; // Текущий раздел
+            module.partitions = new Collection(); // Коллекция разделов системы
+            module.currentPartitionId = ""; // Текущий раздел
 
-            // Регистрирует разделы системы
-            service.registerPartitions = function(){
+            /* Регистрирует разделы системы */
+            module.registerPartitions = function(){
                 // Регистрация разделов платформы
-                angular.forEach(GEARSPlatform.partitions.items, function(partition, key) {
-                    service.partitions.addItem(partition);
+                angular.forEach(Platform.partitions.items, function(partition, key) {
+                    module.partitions.addItem(partition);
                 });
-                // Регистрация разделов приложения
-                angular.forEach(GEARSSpecific.partitions.items, function(partition, key) {
-                    service.partitions.addItem(partition);
+                /* Регистрация разделов приложения */
+                angular.forEach(Specific.partitions.items, function(partition, key) {
+                    module.partitions.addItem(partition);
                 });
-
-                angular.forEach(service.partitions.items, function(partition, key) {
+                /* Регистрация адресов разделов платформы и приложения */
+                angular.forEach(module.partitions.items, function(partition, key) {
                     $routeProvider.when(partition.url,
                         {
                             templateUrl: partition.template,
@@ -44,21 +42,32 @@ var GEARS = angular.module("GEARS", ["ngRoute", "GEARS.Platform", "GEARS.Specifi
                 $routeProvider.otherwise({redirectTo: '/'});
             };
 
-            return service;
+            return module;
         }]);
     })
     /* Инициализация модуля */
-    .run(function(ModuleManager, GEARSBasic, SystemMonitor){
-        ModuleManager.registerModule(GEARSBasic.module); // Регистрация модуля в системе
-        GEARSBasic.registerPartitions(); // Регистрация разделов системы
-        console.log(ModuleManager.modules.items);
-        console.log(GEARSBasic.partitions.items);
-    });
+    .run(function(GEARS, ModuleManager){
+        ModuleManager.registerModule(GEARS.info); // Регистрация модуля в системе
+        GEARS.registerPartitions(); // Регистрация разделов системы
+
+        //console.log(ModuleManager.modules.items);
+        console.log(GEARS.partitions.items);
+    }
+);
 
 /* Контроллер модуля */
-GEARS.controller("GEARSCtrl", ["$scope", "GEARSBasic", "Specific", function($scope, GEARSBasic, Specific){
-    $scope.gears = GEARSBasic;
+GEARS.controller("MenuCtrl", ["$scope", "GEARS", function($scope, GEARS){
+    $scope.menu = GEARS.partitions;
+}]);
+
+GEARS.controller("GEARSCtrl", ["$scope", "GEARS", "Specific", function($scope, GEARS, Specific){
+    $scope.gears = GEARS;
     $scope.application = Specific;
-
-
+    $scope.$on("setPartition", function(event, partitionId){
+        $scope.gears.partitions.findItemById(partitionId).setActive(true);
+        angular.forEach($scope.gears.partitions.items, function (partition) {
+            if(partition.id != partitionId)
+                partition.setActive(false);
+        });
+    });
 }]);

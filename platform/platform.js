@@ -1,25 +1,15 @@
 /*** ГЛОБАЛЬНЫЙ МОДУЛЬ ПЛАТФОРМЫ ***/
-var platform = angular.module("GEARS.Platform", ["Platform.Services"])
+var platform = angular.module("GEARS.Platform", ["Platform.Modules", "Platform.Filters", "Platform.Directives"])
     /* Настройка модуля */
     .config(function($routeProvider, $provide) {
         $provide.factory("Platform", function() {
-            var service = {};
-
-            /* Разделы платформы */
-            service.partitions = new Collection(); // Коллекция разделов платформы
-            angular.forEach(service.partitions.items, function(partition, key) {
-                $routeProvider.when(partition.url, {templateUrl: partition.template, controller: partition.controller});
-            });
-            $routeProvider.when('/', {redirectTo: '/'});
-            $routeProvider.otherwise({redirectTo: '/'});
-
-            return service;
+            var module = {};
+            module.partitions = new Collection(); // Коллекция разделов платформы
+            return module;
         });
-
-
-
     })
     /* Инициализация модуля */
-    .run(function(SystemMonitor){
-        SystemMonitor.addMessage("Platform loaded successfully");
-    });
+    .run(function(){
+
+    }
+);

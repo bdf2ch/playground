@@ -71,9 +71,11 @@ var Partition = function(parameters){
     this.id = 0;
     this.title = "";
     this.description = "";
+    this.url = "",
     this.icon = "";
     this.template = "";
-    this.controller ="";
+    this.controller = "";
+    this.isActive = false;
 
     if(parameters){
         for(var parameter in parameters){
@@ -86,13 +88,19 @@ var Partition = function(parameters){
             }
         }
     }
+
+    Partition.prototype.setActive = function(flag){
+        this.isActive = flag;
+    };
 };
 
+/*** Класс, описывающий структуру модуля ***/
 var Module = function(parameters){
     this.id = 0;
     this.version = "0.0";
     this.title = "";
     this.description = "";
+    //this.partition = "";
 
     if(parameters){
         for(var parameter in parameters){
@@ -106,4 +114,5 @@ var Module = function(parameters){
         }
     }
 };
+
 
