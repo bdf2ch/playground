@@ -44,7 +44,7 @@
                 <div id="menuItems">
                    <!-- <a href="{{ '#' + partition.url }}" class="menuItem" -->
                     <a href="{{ '#' + partition.url }}" class="menuItem"
-                       ng-class="{active: partition.isActive}" ng-repeat="partition in menu.items"
+                       ng-class="{active: partition.isActive}" ng-repeat="partition in menu.items | orderBy:'+orderId'"
                        ng-click="setActivePartition(partition.id)" title="{{ partition.description }}">
                         <div class="menuItemIcon">
                             <img src="" alt=""/>
@@ -74,9 +74,9 @@
     <script src="platform/platform.filters.js"></script>
     <script src="platform/platform.directives.js"></script>
     <!-- <script src="platform/modules/authrization/authorization.js"></script> -->
-    <script src="platform/modules/monitoring/monitoring.js"></script>
+    <script src="platform/modules/console/console.js"></script>
     <script src="platform/modules/module-manager/moduleManager.js"></script>
-    <script src="specific/modules/test-module/test-module.js"></script>
+    <script src="specific/modules/foods/foods.js"></script>
     <!-- Подключение модулей приложения -->
     <script src="specific/classes.js"></script>
     <script src="specific/specific.js"></script>

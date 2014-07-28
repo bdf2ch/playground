@@ -153,3 +153,7 @@
   margin-right: 10px;
   background: lightgray;
 }
+/*** CONSOLE ***/
+#console-wrapper {
+  padding: 10px;
+}

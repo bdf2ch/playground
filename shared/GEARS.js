@@ -22,15 +22,16 @@ var GEARS = angular.module("GEARS", ["ngRoute", "GEARS.Platform", "GEARS.Specifi
             /* Регистрирует разделы системы */
             module.registerPartitions = function(){
                 // Регистрация разделов платформы
-                angular.forEach(Platform.partitions.items, function(partition, key) {
+                angular.forEach(Platform.partitions.items, function(partition) {
+                    partition.isSystem = true;
                     module.partitions.addItem(partition);
                 });
                 /* Регистрация разделов приложения */
-                angular.forEach(Specific.partitions.items, function(partition, key) {
+                angular.forEach(Specific.partitions.items, function(partition) {
                     module.partitions.addItem(partition);
                 });
                 /* Регистрация адресов разделов платформы и приложения */
-                angular.forEach(module.partitions.items, function(partition, key) {
+                angular.forEach(module.partitions.items, function(partition) {
                     $routeProvider.when(partition.url,
                         {
                             templateUrl: partition.template,

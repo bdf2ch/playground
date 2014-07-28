@@ -1,7 +1,7 @@
 /***  Модуль сервисов приложения ***/
 "use strict";
 
-var specificModules = angular.module("Specific.Modules", ["TestModule"])
+var specificModules = angular.module("Specific.Modules", ["Foods"])
     /* Настройка модуля */
     .config(function(){
 

@@ -1,10 +1,10 @@
 /*** Менеджер модулей ***/
 "use strict";
 
-var moduleManager = angular.module("ModuleManager", ["Monitoring"])
+var moduleManager = angular.module("ModuleManager", ["Console"])
     /* Насторойка модуля */
     .config(function($provide){
-        $provide.factory("ModuleManager", ["SystemMonitor", "Platform", function(SystemMonitor, Platform){
+        $provide.factory("ModuleManager", ["Console", "Platform", function(Console){
             var module = {};
             /* Информация о модуле */
             module.info = {
@@ -13,14 +13,13 @@ var moduleManager = angular.module("ModuleManager", ["Monitoring"])
                 title: "Менеджер модулей", // Наименование модуля
                 description: "Менеджер модулей системы"  // Описание модуля
             };
-
             module.modules = new Collection(); // Стек модулей
 
             /* Регистрирует модуль в системе */
             module.registerModule = function(info){
                 if(info){
                     module.modules.addItem(new Module(info));
-                    SystemMonitor.addMessage("Модуль '" + info.title + "' загружен [версия " + info.version + "]");
+                    Console.addMessage("Модуль '" + info.title + "' загружен [версия " + info.version + "]");
                 }
             };
 
@@ -39,7 +38,8 @@ var moduleManager = angular.module("ModuleManager", ["Monitoring"])
                 url: "/modules",
                 icon: "glyphicon glyphicon-cog",
                 template: "platform/modules/module-manager/templates/modulesManager.html",
-                controller: "ModuleManagerCtrl"
+                controller: "ModuleManagerCtrl",
+                orderId: 2
             }
         ));
     });

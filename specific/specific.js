@@ -4,7 +4,6 @@ var specific = angular.module("GEARS.Specific", ["Specific.Modules", "Specific.F
     .config(function($provide){
         $provide.factory("Specific", function(){
             var module = {};
-
             /* Информация о приложении */
             module.info = {
                 title: "Test Application",
